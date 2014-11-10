@@ -29,8 +29,10 @@ brew tap phinze/cask
 brew install brew-cask
 brew cask doctor
 
+brew cask install dropbox
 brew cask install iterm2
 brew cask install google-chrome
+brew cask install google-drive
 brew cask install spectacle
 brew cask install vlc
 
