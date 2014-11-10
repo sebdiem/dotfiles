@@ -6,8 +6,11 @@ git pull origin master;
 
 function doIt() {
 	rsync --exclude ".git/" --exclude ".DS_Store" --exclude "bootstrap.sh" \
+                --exclude "osx.sh" --exclude "brew.sh" \
 		--exclude "README.md" --exclude "LICENSE-MIT.txt" -avh --no-perms . ~;
 	source ~/.bashrc;
+        source brew.sh;
+        source osx.sh;
 }
 
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
