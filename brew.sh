@@ -11,6 +11,7 @@ brew update
 brew upgrade
 brew doctor
 
+# install programs with brew
 brew install bash
 brew install bash-completion
 brew install ffmpeg
@@ -22,3 +23,16 @@ brew install pandoc
 brew install postgresql
 brew install python
 brew install unrar
+
+# install programs with cask
+brew tap phinze/cask
+brew install brew-cask
+brew cask doctor
+
+brew cask install iterm2
+brew cask install google-chrome
+brew cask install spectacle
+brew cask install vlc
+
+brew cask cleanup
+brew cleanup
