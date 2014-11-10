@@ -33,7 +33,9 @@ brew cask install dropbox
 brew cask install iterm2
 brew cask install google-chrome
 brew cask install google-drive
+brew cask install qlmarkdown
 brew cask install spectacle
+brew cask install transmission
 brew cask install vlc
 
 brew cask cleanup
