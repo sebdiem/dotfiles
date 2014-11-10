@@ -19,5 +19,6 @@ brew install languagetool
 brew install macvim --override-system-vim
 brew install multimarkdown
 brew install pandoc
+brew install postgresql
 brew install python
 brew install unrar
