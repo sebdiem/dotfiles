@@ -94,14 +94,27 @@ set_prompts() {
     PS1+="\[$hostStyle\]\h" # host
     PS1+="\[$reset$white\]: "
     PS1+="\[$green\]\w" # working directory
+    PS1+="$(git branch 2>/dev/null | grep -e "\* " | sed "s/^..\(.*\)/ \(\1\)/" | sed "s/feature/F/")"
     PS1+="\n"
     PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)
 
     export PS1
 }
 
-set_prompts
-unset set_prompts
+# this will make a nice prompt (feel free to use your own version)
+export PS1='\n$(tput setaf 7)$(venv_prefix)$(tput setaf 172)\u$(tput setaf 7)@$(tput setaf 3)\h$(tput setaf 7): $(tput setaf 2)\w $(tput setaf 4)$(git branch 2>/dev/null | grep -e "\* " | sed "s/^..\(.*\)/ \(\1\)/" | sed "s/feature/F/") $(tput setaf 7)\n\$ '
+
+# function used by the prompt
+venv_prefix () {
+    if [ -s "$VIRTUAL_ENV" ] ; then
+        echo "(V) "
+    else
+        echo ""
+    fi
+}
+
+# do not use the virtualenv modified prompt (we have our own)
+export VIRTUAL_ENV_DISABLE_PROMPT="1"
 
 #   Set PATH
 #   ------------------------------------------------------------
@@ -111,6 +124,19 @@ export PYTHONPATH
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
+
+# Make a virtualenv:
+mkvirtualenv() {
+    mkdir ~/Projects/$1
+    cd ~/Projects/$1
+    virtualenv venv
+}
+
+# used to go to project root and activate the right venv
+workon () {
+    cd ~/Projects/$1
+    . venv/bin/activate
+}
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
