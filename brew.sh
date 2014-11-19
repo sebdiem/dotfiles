@@ -12,16 +12,22 @@ brew upgrade
 brew doctor
 
 # install programs with brew
+brew install ack
 brew install bash
 brew install bash-completion
+brew install coreutils
+brew install ctags
 brew install ffmpeg
+brew install findutils
 brew install git
+brew install irssi
 brew install languagetool
 brew install macvim --override-system-vim
 brew install multimarkdown
 brew install pandoc
 brew install postgresql
 brew install python
+brew install tree
 brew install unrar
 
 # install programs with cask

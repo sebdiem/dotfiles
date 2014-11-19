@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 " Let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
 " My Bundles
 Plugin 'tpope/vim-fugitive'
@@ -14,6 +14,8 @@ Plugin 'vim-pandoc/vim-pantondoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 "Plugin 'junegunn/goyo.vim'
 Plugin 'vim-scripts/LanguageTool'
+Plugin 'mileszs/ack.vim'
+Plugin 'sebdiem/vim-airline'
 
 call vundle#end()
 filetype plugin indent on
@@ -56,6 +58,12 @@ augroup vimrcEx
 augroup END
 
 """"""""""""""""""""UI""""""""""""""""""""
+" Split right:
+set splitright
+" Always a status line:
+set laststatus=2
+" Allow hidden buffer without screaming
+set hidden
 " Current line and column
 set ruler 
 " Show lines
@@ -103,8 +111,6 @@ nnoremap ù $
 vnoremap ù $
 
 " Quicker window movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
@@ -123,6 +129,22 @@ nmap <LocalLeader>s :wa!<cr>
 nmap <LocalLeader>q :q!<cr>
 nmap <LocalLeader>e :vsp 
 
+" Tags:
+set tags=./tags;
+nmap <LocalLeader>f <C-]>
+
+" Navigate the arglist:
+nnoremap <C-j> :previous<cr>
+nnoremap <C-k> :next<cr>
+nmap <LocalLeader>aa <Plug>AirlineAddArg
+nmap <LocalLeader>ad <Plug>AirlineDeleteArg
+
+" Expand %%/ to current file directory
+cabbr <expr> %% expand('%:p:h')
+
 """"""""""""""""""""Plugins configuration""""""""""""""""""""
 " Language tool
 let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetool-commandline.jar'
+
+" Vim-airline
+let g:airline#extensions#tabline#enabled = 1

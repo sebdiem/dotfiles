@@ -21,93 +21,15 @@
 
 #   Change Prompt
 #   ------------------------------------------------------------
-set_prompts() {
-    local black=""
-    local blue=""
-    local bold=""
-    local cyan=""
-    local green=""
-    local orange=""
-    local purple=""
-    local red=""
-    local reset=""
-    local white=""
-    local yellow=""
 
-    local hostStyle=""
-    local userStyle=""
-
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-        tput sgr0 # reset colors
-
-        bold=$(tput bold)
-        reset=$(tput sgr0)
-
-        # Jellybeans colors
-        # https://github.com/mbadolato/iTerm2-Color-Schemes
-        black=$(tput setaf 0)
-        red=$(tput setaf 1)
-        green=$(tput setaf 2)
-        yellow=$(tput setaf 3)
-        blue=$(tput setaf 4)
-        cyan=$(tput setaf 6)
-        white=$(tput setaf 7)
-        orange=$(tput setaf 172)
-        purple=$(tput setaf 125)
-    else
-        bold=""
-        reset="\e[0m"
-
-        black="\e[1;30m"
-        blue="\e[1;34m"
-        cyan="\e[1;36m"
-        green="\e[1;32m"
-        orange="\e[1;33m"
-        purple="\e[1;35m"
-        red="\e[1;31m"
-        white="\e[1;37m"
-        yellow="\e[1;33m"
-    fi
-
-    # build the prompt
-
-    # logged in as root
-    if [[ "$USER" == "root" ]]; then
-        userStyle="\[$bold$red\]"
-    else
-        userStyle="\[$orange\]"
-    fi
-
-    # connected via ssh
-    if [[ "$SSH_TTY" ]]; then
-        hostStyle="\[$bold$red\]"
-    else
-        hostStyle="\[$yellow\]"
-    fi
-
-    # set the terminal title to the current working directory
-    PS1="\[\033]0;\w\007\]"
-
-    PS1+="\n" # newline
-    PS1+="\[$userStyle\]\u" # username
-    PS1+="\[$reset$white\]@"
-    PS1+="\[$hostStyle\]\h" # host
-    PS1+="\[$reset$white\]: "
-    PS1+="\[$green\]\w" # working directory
-    PS1+="$(git branch 2>/dev/null | grep -e "\* " | sed "s/^..\(.*\)/ \(\1\)/" | sed "s/feature/F/")"
-    PS1+="\n"
-    PS1+="\[$reset$white\]\$ \[$reset\]" # $ (and reset color)
-
-    export PS1
-}
-
-# this will make a nice prompt (feel free to use your own version)
 export PS1='\n$(tput setaf 7)$(venv_prefix)$(tput setaf 172)\u$(tput setaf 7)@$(tput setaf 3)\h$(tput setaf 7): $(tput setaf 2)\w $(tput setaf 4)$(git branch 2>/dev/null | grep -e "\* " | sed "s/^..\(.*\)/ \(\1\)/" | sed "s/feature/F/") $(tput setaf 7)\n\$ '
 
 # function used by the prompt
 venv_prefix () {
+    # This function assumes that the virtual env is located at the root of the project you are working on
     if [ -s "$VIRTUAL_ENV" ] ; then
-        echo "(V) "
+        venv=`python -c "import os, sys; sys.stdout.write(os.environ['VIRTUAL_ENV'].split('/')[-2])"`
+        echo "($venv) "
     else
         echo ""
     fi
@@ -124,19 +46,6 @@ export PYTHONPATH
 
 # Set architecture flags
 export ARCHFLAGS="-arch x86_64"
-
-# Make a virtualenv:
-mkvirtualenv() {
-    mkdir ~/Projects/$1
-    cd ~/Projects/$1
-    virtualenv venv
-}
-
-# used to go to project root and activate the right venv
-workon () {
-    cd ~/Projects/$1
-    . venv/bin/activate
-}
 
 #   -----------------------------
 #   2.  MAKE TERMINAL BETTER
@@ -158,11 +67,21 @@ alias fgrep='fgrep --color=auto'            # fgrep with colors
 alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-function tree(){                            # tree:         Displays a tree of the current directory (limit to 100 directories)
-	pwd
-	ls -R | grep ":$" |   \
-	sed -e 's/:$//' -e 's/[^-][^\/]*\//--/g' -e 's/^/   /' -e 's/-/|/' | head -n 100
+alias mktags='ctags -R --exclude=.git --exclude=*.js --exclude=*.sql --exclude=*.pxd'
+
+# Make a virtualenv:
+mkvirtualenv() {
+    mkdir ~/Projects/$1
+    cd ~/Projects/$1
+    virtualenv venv
 }
+
+# used to go to project root and activate the right venv
+workon () {
+    cd ~/Projects/$1
+    . venv/bin/activate
+}
+
 
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
