@@ -136,6 +136,7 @@ nmap <LocalLeader>f <C-]>
 " Navigate the arglist:
 nnoremap <C-j> :previous<cr>
 nnoremap <C-k> :next<cr>
+nnoremap <Return> :argument<cr>
 nmap <LocalLeader>aa <Plug>AirlineAddArg
 nmap <LocalLeader>ad <Plug>AirlineDeleteArg
 
