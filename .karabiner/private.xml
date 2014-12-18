@@ -37,6 +37,14 @@
         KeyCode::KEY_5, ModifierFlag::OPTION_L,
         KeyCode::KEY_0, ModifierFlag::OPTION_L,
     </autogen>
+
+    <name>Map CTRL+J to ENTER</name>
+    <identifier>private.map_space_with_enter</identifier>
+    <autogen>
+        __KeyToKey__
+        KeyCode::J, ModifierFlag::CONTROL_L,
+        KeyCode::ENTER
+    </autogen>
   </item>
 
 
