@@ -95,6 +95,7 @@ workon () {
 
 # re-create ctags after a git commit or rebase
 git () {
+  GIT_CMD=`which git`
     $GIT_CMD "$@"
     status="$?"
     [[ $status = 0 ]] || return $status
