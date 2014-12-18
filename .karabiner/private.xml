@@ -39,11 +39,18 @@
     </autogen>
 
     <name>Map CTRL+J to ENTER</name>
-    <identifier>private.map_space_with_enter</identifier>
+    <identifier>private.map_ctrl_j_to_enter</identifier>
     <autogen>
         __KeyToKey__
         KeyCode::J, ModifierFlag::CONTROL_L,
         KeyCode::ENTER
+    </autogen>
+    <name>Map CTRL+F to _</name>
+    <identifier>private.ctrl_f_to_underscore</identifier>
+    <autogen>
+        __KeyToKey__
+        KeyCode::F, ModifierFlag::CONTROL_L,
+        KeyCode::EQUAL, ModifierFlag::SHIFT_L,
     </autogen>
   </item>
 
