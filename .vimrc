@@ -14,6 +14,7 @@ Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'sebdiem/vim-airline'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'vim-pandoc/vim-pantondoc'
@@ -115,6 +116,8 @@ vnoremap ù $
 " Quicker window movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 " Press Double Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <LocalLeader><LocalLeader> :nohlsearch<Bar>:echo<CR>
@@ -139,16 +142,24 @@ set tags=./tags;
 nmap <LocalLeader>t <C-]>
 nmap <LocalLeader>f :Ack <c-r>=expand("<cword>")<cr><cr>
 
-" Navigate the arglist:
-nnoremap <C-j> :previous<cr>
-nnoremap <C-k> :next<cr>
 " view current arg:
 nnoremap <Return> :argument<cr>
 nmap <LocalLeader>aa <Plug>AirlineAddArg
 nmap <LocalLeader>ad <Plug>AirlineDeleteArg
 
-" Expand %%/ to current file directory
+" Expand %%/ to current file directory:
 cabbr <expr> %% expand('%:p:h')
+
+" reset path:
+nmap <LocalLeader>p :exe 'set path='.getcwd().'/**'<cr>:set path<cr>
+
+" For unimpaired.vim
+nmap ( [
+omap ( [
+xmap ( [
+nmap ) ]
+omap ) ]
+xmap ) ]
 
 """"""""""""""""""""Plugins configuration""""""""""""""""""""
 " Language tool
