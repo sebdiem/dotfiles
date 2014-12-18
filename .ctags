@@ -1,0 +1,12 @@
+--python-kinds=-i
+--exclude=.git
+--exclude=*.js
+--exclude=*.sql
+--exclude=*.pxd
+--exclude=Makefile
+--exclude=*.mk
+--exclude=*.h
+--exclude=*.c
+--exclude=*.html
+--exclude=*.php
+--exclude=*.sh

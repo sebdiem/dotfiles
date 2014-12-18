@@ -64,59 +64,86 @@ alias .6='cd ../../../../../../'            # Go back 6 directory levels
 alias grep='grep --color=auto'              # grep with colors
 alias egrep='egrep --color=auto'            # egrep with colors
 alias fgrep='fgrep --color=auto'            # fgrep with colors
-alias f='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
+alias finder='open -a Finder ./'                 # f:            Opens current directory in MacOS Finder
 alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
 trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
-alias mktags='ctags -R --exclude=.git --exclude=*.js --exclude=*.sql --exclude=*.pxd'
+alias mktags='ctags -R'
+alias rmhidden='rm -rf .[^.] .??*'          # remove hidden files and folders in current directory 
 
 # Make a virtualenv:
 mkvirtualenv() {
-    mkdir ~/Projects/$1
-    cd ~/Projects/$1
-    virtualenv venv
+    if [ -n "$1" ]
+    then
+        mkdir ~/Projects/$1
+        cd ~/Projects/$1
+        virtualenv venv
+    else
+        echo "usage: mkvirtualenv project_name"
+    fi
 }
 
 # used to go to project root and activate the right venv
 workon () {
-    cd ~/Projects/$1
-    . venv/bin/activate
+    if [ -n "$1" ]
+    then
+        cd ~/Projects/$1
+        . venv/bin/activate
+    else
+        echo "usage: workon project_name"
+    fi
 }
 
+# re-create ctags after a git commit or rebase
+git () {
+    GIT_CMD=`which git`
+    $GIT_CMD "$@"
+    status="$?"
+    [[ $status = 0 ]] || return $status
+
+    for opt in "$@"; do
+        case "$opt" in
+            commit | rebase)
+                $GIT_CMD ctags
+                break
+                ;;
+        esac
+    done
+}
 
 #   extract:  Extract most know archives with one command
 #   ---------------------------------------------------------
-    extract () {
-        if [ -f $1 ] ; then
-          case $1 in
-            *.tar.bz2)   tar xjf $1     ;;
-            *.tar.gz)    tar xzf $1     ;;
-            *.bz2)       bunzip2 $1     ;;
-            *.rar)       unrar e $1     ;;
-            *.gz)        gunzip $1      ;;
-            *.tar)       tar xf $1      ;;
-            *.tbz2)      tar xjf $1     ;;
-            *.tgz)       tar xzf $1     ;;
-            *.zip)       unzip $1       ;;
-            *.Z)         uncompress $1  ;;
-            *.7z)        7z x $1        ;;
-            *)     echo "'$1' cannot be extracted via extract()" ;;
-             esac
-         else
-             echo "'$1' is not a valid file"
-         fi
-    }
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
 
 #   ---------------------------
 #   4.  SEARCHING
 #   ---------------------------
 
-alias qfind="find . -iname "                 # qfind:    Quickly search for file
-ffs () { /usr/bin/find . -iname "$@"'*' ; }  # ffs:      Find file whose name starts with a given string
-ffe () { /usr/bin/find . -iname '*'"$@" ; }  # ffe:      Find file whose name ends with a given string
+alias fq="gfind -name "                 # qfind:    Quickly search for file
+fs () { gfind -name "$@"'*' ; }           # ffs:      Find file whose name starts with a given string
+fe () { gfind -name '*'"$@" ; }           # ffe:      Find file whose name ends with a given string
 
 #   spotlight: Search for a file using MacOS Spotlight's metadata
 #   -----------------------------------------------------------
-    spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
+spotlight () { mdfind "kMDItemDisplayName == '$@'wc"; }
 
 export JAVA_HOME="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home"
 

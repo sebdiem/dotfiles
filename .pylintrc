@@ -1,0 +1,9 @@
+[MESSAGES CONTROL]
+
+disable-msg=C0111,C0112,E1101,W0311,W0312
+# new pylint uses "disable" option instead of "disble-msg"
+disable=C0111,C0112,E1101,W0311,W0312
+
+[MISCELLANEOUS]
+
+max-line-length=120

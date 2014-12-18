@@ -16,7 +16,7 @@ brew install ack
 brew install bash
 brew install bash-completion
 brew install coreutils
-brew install ctags
+brew install ctags-exuberant
 brew install ffmpeg
 brew install findutils
 brew install git
@@ -43,6 +43,7 @@ brew cask install qlmarkdown
 brew cask install spectacle
 brew cask install transmission
 brew cask install vlc
+brew cask install karabiner
 
 brew cask cleanup
 brew cleanup

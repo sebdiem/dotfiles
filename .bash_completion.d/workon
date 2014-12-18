@@ -1,0 +1,7 @@
+_workon()
+{
+    local cur=${COMP_WORDS[COMP_CWORD]}
+    local projects=`ls ~/Projects`
+    COMPREPLY=( $(compgen -W "$projects" -- $cur) )
+}
+complete -F _workon workon

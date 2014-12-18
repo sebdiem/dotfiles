@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Swap ( and à</name>
+    <identifier>private.swap_opening_parenthesis_and_a</identifier>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_0, ModifierFlag::NONE,
+        KeyCode::KEY_5, ModifierFlag::NONE,
+    </autogen>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_5, ModifierFlag::NONE,
+        KeyCode::KEY_0, ModifierFlag::NONE,
+    </autogen>
+    <name>Swap ( and à continued</name>
+    <identifier>private.swap_opening_parenthesis_and_a_c</identifier>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_0, ModifierFlag::OPTION_L, ModifierFlag::OPTION_L,
+        KeyCode::KEY_5, ModifierFlag::OPTION_L, ModifierFlag::OPTION_L,
+    </autogen>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_5, ModifierFlag::OPTION_L, ModifierFlag::OPTION_L,
+        KeyCode::KEY_0, ModifierFlag::OPTION_L, ModifierFlag::OPTION_L,
+    </autogen>
+    <name>Swap ( and à finish</name>
+    <identifier>private.swap_opening_parenthesis_and_a_f</identifier>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_0, ModifierFlag::OPTION_L,
+        KeyCode::KEY_5, ModifierFlag::OPTION_L,
+    </autogen>
+    <autogen>
+        __KeyToKey__
+        KeyCode::KEY_5, ModifierFlag::OPTION_L,
+        KeyCode::KEY_0, ModifierFlag::OPTION_L,
+    </autogen>
+  </item>
+
+
+  <!-- ============================================================ -->
+</root>

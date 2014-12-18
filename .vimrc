@@ -8,14 +8,16 @@ call vundle#begin()
 " Let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundles
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-pandoc/vim-pantondoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'junegunn/goyo.vim'
-Plugin 'vim-scripts/LanguageTool'
+" My Plugins
+Plugin 'Raimondi/delimitMate'
 Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/syntastic'
 Plugin 'sebdiem/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-pantondoc'
+Plugin 'vim-scripts/LanguageTool'
 
 call vundle#end()
 filetype plugin indent on
@@ -129,13 +131,18 @@ nmap <LocalLeader>s :wa!<cr>
 nmap <LocalLeader>q :q!<cr>
 nmap <LocalLeader>e :vsp 
 
-" Tags:
+" add python breakpoint
+nmap <LocalLeader>b Oimport ipdb; ipdb.set_trace()<ESC>
+
+" Tags and search
 set tags=./tags;
-nmap <LocalLeader>f <C-]>
+nmap <LocalLeader>t <C-]>
+nmap <LocalLeader>f :Ack <c-r>=expand("<cword>")<cr><cr>
 
 " Navigate the arglist:
 nnoremap <C-j> :previous<cr>
 nnoremap <C-k> :next<cr>
+" view current arg:
 nnoremap <Return> :argument<cr>
 nmap <LocalLeader>aa <Plug>AirlineAddArg
 nmap <LocalLeader>ad <Plug>AirlineDeleteArg
@@ -149,3 +156,7 @@ let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetoo
 
 " Vim-airline
 let g:airline#extensions#tabline#enabled = 1
+
+" Syntastic
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
