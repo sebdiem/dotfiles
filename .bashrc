@@ -95,14 +95,13 @@ workon () {
 
 # re-create ctags after a git commit or rebase
 git () {
-    GIT_CMD=`which git`
     $GIT_CMD "$@"
     status="$?"
     [[ $status = 0 ]] || return $status
 
     for opt in "$@"; do
         case "$opt" in
-            commit | rebase)
+            commit | rebase | pr | ci)
                 $GIT_CMD ctags
                 break
                 ;;
