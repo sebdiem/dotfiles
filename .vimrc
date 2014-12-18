@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " My Plugins
+Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mileszs/ack.vim'
 Plugin 'scrooloose/syntastic'
