@@ -8,17 +8,18 @@ call vundle#begin()
 " Let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-" My Bundles
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-pandoc/vim-pantondoc'
-Plugin 'vim-pandoc/vim-pandoc-syntax'
-"Plugin 'junegunn/goyo.vim'
-Plugin 'vim-scripts/LanguageTool'
-Plugin 'mileszs/ack.vim'
-Plugin 'sebdiem/vim-airline'
-Plugin 'scrooloose/syntastic'
+" My Plugins
+Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
+Plugin 'mileszs/ack.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'sebdiem/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'vim-pandoc/vim-pantondoc'
+Plugin 'vim-scripts/LanguageTool'
 
 call vundle#end()
 filetype plugin indent on
@@ -116,6 +117,8 @@ vnoremap ù $
 " Quicker window movement
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
 
 " Press Double Space to turn off highlighting and clear any message already displayed.
 nnoremap <silent> <LocalLeader><LocalLeader> :nohlsearch<Bar>:echo<CR>
@@ -132,21 +135,34 @@ nmap <LocalLeader>s :wa!<cr>
 nmap <LocalLeader>q :q!<cr>
 nmap <LocalLeader>e :vsp 
 
-" Tags:
-set tags=./tags;
-nmap <LocalLeader>f <C-]>
+" add python breakpoint
+nmap <LocalLeader>b Oimport ipdb; ipdb.set_trace()<ESC>
 
-" Navigate the arglist:
-nnoremap <C-j> :previous<cr>
-nnoremap <C-k> :next<cr>
+" Tags and search
+set tags=./tags;
+nmap <LocalLeader>t <C-]>
+nmap <LocalLeader>f :Ack <c-r>=expand("<cword>")<cr><cr>
+
+" view current arg:
 nnoremap <Return> :argument<cr>
 nmap <LocalLeader>aa <Plug>AirlineAddArg
 nmap <LocalLeader>ad <Plug>AirlineDeleteArg
 
-" Expand %%/ to current file directory
+" Expand %%/ to current file directory:
 cabbr <expr> %% expand('%:p:h')
 
-" Remap for parenthesis
+" reset path:
+nmap <LocalLeader>p :exe 'set path='.getcwd().'/**'<cr>:set path<cr>
+
+" For unimpaired.vim
+nmap ( [
+omap ( [
+xmap ( [
+nmap ) ]
+omap ) ]
+xmap ) ]
+
+" Parenthesis
 imap <C-l> <S-Tab>
 
 """"""""""""""""""""Plugins configuration""""""""""""""""""""
@@ -155,3 +171,7 @@ let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetoo
 
 " Vim-airline
 let g:airline#extensions#tabline#enabled = 1
+
+" Syntastic
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
