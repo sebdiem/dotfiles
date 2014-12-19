@@ -156,3 +156,4 @@ fi
 #   7.  SYSTEM OPERATIONS & INFORMATION
 #   ---------------------------
 defaults write NSGlobalDomain KeyRepeat -int 0
+stty -ixon
