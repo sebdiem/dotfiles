@@ -7,7 +7,7 @@ function createVundle() {
     VUNDLE_DIR=~/.vim/bundle/Vundle.vim
     if [ ! -d "$VUNDLE_DIR" ]
     then
-        git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+        git clone https://github.com/gmarik/Vundle.vim.git $VUNDLE_DIR
     fi
 }
 

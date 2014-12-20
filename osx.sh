@@ -273,9 +273,6 @@ cp "${HOME}/.init/com.googlecode.iterm2.plist" "${HOME}/Library/Preferences/com.
 defaults delete "com.divisiblebyzero.Spectacle.plist"
 cp "${HOME}/.init/com.divisiblebyzero.Spectacle.plist" "${HOME}/Library/Preferences/com.divisiblebyzero.Spectacle.plist"
 
-# Init vundle for vim
-git clone https://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 ###############################################################################
 # Address Book, Dashboard, iCal, TextEdit, and Disk Utility                   #
 ###############################################################################
