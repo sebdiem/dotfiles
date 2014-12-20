@@ -141,7 +141,7 @@ nmap <LocalLeader>b Oimport ipdb; ipdb.set_trace()<ESC>
 " Tags and search
 set tags=./tags;
 nmap <LocalLeader>t <C-]>
-nmap <LocalLeader>f :Ack <c-r>=expand("<cword>")<cr><cr>
+nmap <LocalLeader>f *:Ack <c-r>=expand("<cword>")<cr><cr>
 
 " view current arg:
 nnoremap <Return> :argument<cr>
