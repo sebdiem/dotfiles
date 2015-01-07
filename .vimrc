@@ -173,5 +173,6 @@ let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetoo
 let g:airline#extensions#tabline#enabled = 1
 
 " Syntastic
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
