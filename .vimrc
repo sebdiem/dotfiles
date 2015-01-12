@@ -88,6 +88,8 @@ set ignorecase smartcase
 set autoread
 " Shut the fuck up
 set vb t_vb=
+" Show column
+set colorcolumn=120
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
