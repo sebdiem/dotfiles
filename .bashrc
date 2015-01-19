@@ -88,6 +88,7 @@ workon () {
     then
         cd ~/Projects/$1
         . venv/bin/activate
+        export PATH=node_modules/.bin:$PATH
     else
         echo "usage: workon project_name"
     fi
