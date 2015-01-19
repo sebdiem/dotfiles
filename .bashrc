@@ -40,7 +40,7 @@ export VIRTUAL_ENV_DISABLE_PROMPT="1"
 
 #   Set PATH
 #   ------------------------------------------------------------
-export PATH=~/bin:/usr/local:/usr/local/bin:$PATH
+export PATH=node_modules/.bin:~/bin:/usr/local:/usr/local/bin:$PATH
 PYTHONPATH="${PATH}"
 export PYTHONPATH
 
@@ -156,4 +156,3 @@ fi
 #   7.  SYSTEM OPERATIONS & INFORMATION
 #   ---------------------------
 defaults write NSGlobalDomain KeyRepeat -int 0
-stty -ixon
