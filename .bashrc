@@ -157,3 +157,4 @@ fi
 #   7.  SYSTEM OPERATIONS & INFORMATION
 #   ---------------------------
 defaults write NSGlobalDomain KeyRepeat -int 0
+HISTFILESIZE=5000

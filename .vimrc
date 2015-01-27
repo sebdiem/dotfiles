@@ -52,6 +52,7 @@ set directory=~/.vim/swap,~/tmp,
 
 """"""""""""""""""""Filetype & encoding""""""""""""""""""""
 " utf-8
+scriptencoding utf-8
 set encoding=utf-8
 
 augroup vimrcEx
@@ -166,6 +167,10 @@ xmap ) ]
 
 " Parenthesis
 imap <C-l> <S-Tab>
+
+" Edit in next window
+command! -nargs=1 -complete=file E :wincmd w | :e <args>
+command! -nargs=1 -complete=buffer B :wincmd w | :b <args>
 
 """"""""""""""""""""Plugins configuration""""""""""""""""""""
 " Language tool
