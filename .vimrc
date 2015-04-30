@@ -183,3 +183,6 @@ let g:airline#extensions#tabline#enabled = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_python_checkers = ['pylint']
 let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
+
+" Ack
+let g:ackprg = "git grep"
