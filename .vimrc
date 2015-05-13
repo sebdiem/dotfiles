@@ -91,6 +91,8 @@ set autoread
 set vb t_vb=
 " Show column
 set colorcolumn=120
+" Nice mouse
+set mouse=nicr
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
