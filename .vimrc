@@ -12,7 +12,8 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'Raimondi/delimitMate'
 Plugin 'mileszs/ack.vim'
-Plugin 'scrooloose/syntastic'
+"Plugin 'scrooloose/syntastic'
+Plugin 'benekastah/neomake'
 Plugin 'sebdiem/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-repeat'
@@ -144,7 +145,9 @@ nmap <LocalLeader>e :vsp
 nmap <LocalLeader>b Oimport ipdb; ipdb.set_trace()<ESC>
 
 " Tags and search
-set tags=./tags;
+set tags=./tags; " choose the nearest tag file in the upstream directories
+" Then you can always use set tags+=path/to/tags to add another file
+" :echo tagfiles() lists all the files used by the current buffer
 nmap <LocalLeader>t <C-]>
 nmap <LocalLeader>f *:Ack <c-r>=expand("<cword>")<cr><cr>
 
@@ -174,6 +177,16 @@ imap <C-l> <S-Tab>
 command! -nargs=1 -complete=file E :wincmd w | :e <args>
 command! -nargs=1 -complete=buffer B :wincmd w | :b <args>
 
+command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
+
 """"""""""""""""""""Plugins configuration""""""""""""""""""""
 " Language tool
 let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetool-commandline.jar'
@@ -182,9 +195,19 @@ let g:languagetool_jar='/usr/local/cellar/languagetool/2.4.1/libexec/languagetoo
 let g:airline#extensions#tabline#enabled = 1
 
 " Syntastic
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_python_checkers = ['pylint']
-let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
+let g:airline#extensions#syntastic#enabled = 0
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_python_checkers = ['pylint']
+" let g:syntastic_python_pylint_args = '--rcfile=/Users/Seb/.pylintrc'
 
 " Ack
 let g:ackprg = "git grep"
+
+" NeoMake
+let g:neomake_airline = 1
+let g:neomake_pylint_maker = {
+    \ 'args': ['--rcfile=/Users/Seb/.pylintrc', '--confidence=HIGH'],
+    \ 'errorformat': '%f:%l:%c: %m',
+    \ }
+let g:neomake_python_enabled_makers = ['pylint']
+autocmd BufWritePost *.py :Neomake
